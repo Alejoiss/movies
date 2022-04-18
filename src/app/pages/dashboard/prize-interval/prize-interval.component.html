@@ -1,0 +1,45 @@
+<app-loader *ngIf="!(data$ | async); else content"></app-loader>
+
+<ng-template #content>
+    <h4>Producers with longest and shortest interval between wins</h4>
+
+    <h3 class="fw-normal">Maximum</h3>
+    <app-table>
+        <thead thead>
+            <tr>
+                <th>Producer</th>
+                <th>Interval</th>
+                <th>Previous year</th>
+                <th>Following year</th>
+            </tr>
+        </thead>
+        <tbody tbody>
+            <tr *ngFor="let item of (data$ | async)?.max">
+                <td>{{ item.producer}}</td>
+                <td>{{ item.interval }}</td>
+                <td>{{ item.previousWin }}</td>
+                <td>{{ item.followingWin }}</td>
+            </tr>
+        </tbody>
+    </app-table>
+
+    <h3 class="fw-normal">Minimum</h3>
+    <app-table>
+        <thead thead>
+            <tr>
+                <th>Producer</th>
+                <th>Interval</th>
+                <th>Previous year</th>
+                <th>Following year</th>
+            </tr>
+        </thead>
+        <tbody tbody>
+            <tr *ngFor="let item of (data$ | async)?.min">
+                <td>{{ item.producer}}</td>
+                <td>{{ item.interval }}</td>
+                <td>{{ item.previousWin }}</td>
+                <td>{{ item.followingWin }}</td>
+            </tr>
+        </tbody>
+    </app-table>
+</ng-template>

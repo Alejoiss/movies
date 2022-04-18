@@ -1,0 +1,35 @@
+.container-loader {
+    left: 50%;
+    position: relative;
+    transform: translateX(-50%);
+    text-align: center;
+    margin-bottom: 40px;
+
+    .loader {
+        font-size: 70px;
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes shadowPulse {
+    0% {
+        transform: translateX(-50%) translateY(-50%) scale(0.8);
+    }
+    100% {
+        transform: translateX(-50%) translateY(-50%) scale(1);
+        box-shadow: 0 0 0 70px rgba(90, 153, 212, 0);
+    }
+}
+
+h3 {
+    text-align: center;
+    font-size: 22px;
+}

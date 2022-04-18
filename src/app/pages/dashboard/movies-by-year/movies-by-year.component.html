@@ -1,0 +1,47 @@
+<app-loader *ngIf="!(data$ | async); else content"></app-loader>
+
+<ng-template #content>
+    <h4>List movie winners by year</h4>
+
+    <form [formGroup]="form">
+        <div class="row mb-3">
+            <div class="col-10">
+                <div class="form-group">
+                    <input type="number" name="search" id="search" class="form-control" min="1900" [max]="currentYear"
+                        formControlName="year" (keyup.enter)="search()">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="button" class="btn btn-info w-100" (click)="search()">
+                    <i class="las la-search"></i>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <app-table>
+        <thead thead>
+            <tr>
+                <th>Id</th>
+                <th>Year</th>
+                <th>Title</th>
+            </tr>
+        </thead>
+        <tbody tbody>
+            <ng-container *ngIf="(data$ | async)?.length; else noMovie">
+                <tr *ngFor="let item of (data$ | async)">
+                    <td>{{ item.id}}</td>
+                    <td>{{ item.year }}</td>
+                    <td>{{ item.title }}</td>
+                </tr>
+            </ng-container>
+            <ng-template #noMovie>
+                <tr>
+                    <td class="text-muted text-center" colspan="3">
+                        <em>No movie for the selected year</em>
+                    </td>
+                </tr>
+            </ng-template>
+        </tbody>
+    </app-table>
+</ng-template>

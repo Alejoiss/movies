@@ -1,0 +1,19 @@
+<app-loader *ngIf="!(data$ | async); else content"></app-loader>
+
+<ng-template #content>
+    <h4>Top 3 studios with winners</h4>
+    <app-table>
+        <thead thead>
+            <tr>
+                <th>Year</th>
+                <th>Win Count</th>
+            </tr>
+        </thead>
+        <tbody tbody>
+            <tr *ngFor="let item of (data$ | async)?.studios">
+                <td>{{ item.name}}</td>
+                <td>{{ item.winCount }}</td>
+            </tr>
+        </tbody>
+    </app-table>
+</ng-template>
