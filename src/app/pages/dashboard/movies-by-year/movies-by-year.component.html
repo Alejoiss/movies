@@ -9,6 +9,10 @@
                 <div class="form-group">
                     <input type="number" name="search" id="search" class="form-control" min="1900" [max]="currentYear"
                         formControlName="year" (keyup.enter)="search()">
+                    <div class="form-text"
+                        *ngIf="form.controls['year'].invalid && (form.controls['year'].touched || form.controls['year'].dirty)">
+                        Enter a year between 1900 and {{ currentYear }}.
+                    </div>
                 </div>
             </div>
             <div class="col-2">

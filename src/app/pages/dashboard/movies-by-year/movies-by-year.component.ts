@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import * as _ from 'lodash';
 import { map, Observable, shareReplay } from 'rxjs';
 import { TopStudios } from 'src/app/models/top-studios';
-import { WinnerMovie } from 'src/app/models/winner-movies';
+import { Movie } from 'src/app/models/movie';
 import { MoviesService } from 'src/app/services/movies/movies.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { MoviesService } from 'src/app/services/movies/movies.service';
     styleUrls: ['./movies-by-year.component.scss']
 })
 export class MoviesByYearComponent implements OnInit {
-    data$!: Observable<WinnerMovie[]>;
+    data$!: Observable<Movie[]>;
     currentYear = new Date().getFullYear();
     form!: FormGroup;
 
@@ -26,7 +26,7 @@ export class MoviesByYearComponent implements OnInit {
         this.getWinnerMovies(this.currentYear);
 
         this.form = this.formBuilder.group({
-            year: [this.currentYear, [Validators.required]]
+            year: [this.currentYear, [Validators.required, Validators.min(1980), Validators.max(this.currentYear)]]
         });
     }
 

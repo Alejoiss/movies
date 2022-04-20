@@ -1,4 +1,4 @@
-export class WinnerMovie {
+export class Movie {
     id!: number;
     producers!: string[];
     studios!: string[];

@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MaxMinIntervalPrizes } from 'src/app/models/max-min-interval-prizes';
 import { TopStudios } from 'src/app/models/top-studios';
-import { WinnerMovie } from 'src/app/models/winner-movies';
+import { Movie } from 'src/app/models/movie';
 import { YearsWithMultipleWinners } from 'src/app/models/years-with-multiple-winners';
 import { environment } from 'src/environments/environment';
+import { MovieData } from 'src/app/models/movie-data';
 
 @Injectable({
     providedIn: 'root'
@@ -16,8 +17,8 @@ export class MoviesService {
         private http: HttpClient
     ) { }
 
-    getMovies(httpParams: HttpParams): Observable<any> {
-        return this.http.get(`${environment.apiUrl}`, {
+    getMovies(httpParams: HttpParams): Observable<MovieData> {
+        return this.http.get<MovieData>(`${environment.apiUrl}`, {
             params: httpParams
         });
     }
@@ -46,8 +47,8 @@ export class MoviesService {
         });
     }
 
-    getWinnerMovies(httpParams: HttpParams): Observable<WinnerMovie[]> {
-        return this.http.get<WinnerMovie[]>(`${environment.apiUrl}`, {
+    getWinnerMovies(httpParams: HttpParams): Observable<Movie[]> {
+        return this.http.get<Movie[]>(`${environment.apiUrl}`, {
             params: httpParams
         });
     }

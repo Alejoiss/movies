@@ -18,7 +18,7 @@ import { AppComponent } from './app.component';
         RouterModule,
         AsideModule,
         NavbarModule,
-        HttpClientModule,
+        HttpClientModule
     ],
     providers: [],
     bootstrap: [AppComponent]

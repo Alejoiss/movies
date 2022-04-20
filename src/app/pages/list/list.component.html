@@ -1,1 +1,45 @@
-<p>list works!</p>
+<app-loader *ngIf="!(movies$ | async); else content"></app-loader>
+
+<ng-template #content>
+    <h4>List movies</h4>
+    <app-table>
+        <thead thead>
+            <tr>
+                <th class="text-center w-25">Id</th>
+                <th class="text-center w-25">
+                    <div>Year</div>
+                    <div>
+                        <input type="text" id="year" name="year" class="form-control" [formControl]="yearControl">
+                        <div class="form-text" *ngIf="yearControl.invalid">Enter a year between 1900 and {{ currentYear }}.</div>
+                    </div>
+                </th>
+                <th class="text-center w-25">Title</th>
+                <th class="text-center w-25">
+                    <div>Winner?</div>
+                    <div>
+                        <select name="winner" id="winner" class="form-control" [formControl]="winnerControl">
+                            <option value="">Yes/No</option>
+                            <option [ngValue]="true">Yes</option>
+                            <option [ngValue]="false">No</option>
+                        </select>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody tbody>
+            <tr *ngFor="let item of (movies$ | async)">
+                <td>{{ item.id}}</td>
+                <td>{{ item.year }}</td>
+                <td>{{ item.title }}</td>
+                <td>{{ item.winner | yesNo }}</td>
+            </tr>
+        </tbody>
+    </app-table>
+
+    <div class="row">
+        <div class="col-xs-12 col-12 d-flex justify-content-center">
+            <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
+            </pagination>
+        </div>
+    </div>
+</ng-template>
